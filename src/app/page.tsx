@@ -32,7 +32,7 @@ export default function Home() {
             <Calendar />
           </div>
           <div className="col-span-2">
-          <button onClick={() => setIsOpen(true)} className="bg-pink-400 hover:bg-pink-500 w-auto text-white rounded-full px-4 py-2 border border-black my-5 mx-10 active:bg-pink-600" role="button">追加</button>
+          <button onClick={() => setIsOpen(true)} className="bg-pink-400 hover:bg-pink-500 w-10/12 text-white rounded-full px-4 py-2 border border-black my-5 mx-10 active:bg-pink-600" role="button">追加</button>
           </div>
         </div>
         <CustomModal 

@@ -73,7 +73,8 @@ export default function CustomModal(props: CustomModalProps) {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       borderRadius: '20px',
-      overflow: (props.canScroll) ? 'scroll' : 'hidden' 
+      overflow: (props.canScroll) ? 'scroll' : 'hidden', 
+      overflowX: 'hidden'
       // transition: 'opacity 1s ease-in-out'
 //      marginRight: '-50%',
 //      transform: 'translate(-50%, -50%)'
