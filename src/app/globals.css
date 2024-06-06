@@ -49,6 +49,20 @@ input {
   @apply bg-pink-200;
 }
 .fc-v-event {
-  @apply bg-pink-500 border border-pink-600 ;
-  
+  @apply bg-pink-500 border border-pink-600 ; 
+}
+
+.ReactModal__Overlay--after-open{
+  @apply z-50;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.fc-day-sat a {
+  @apply text-blue-500;
+}
+.fc-day-sun a {
+  @apply text-red-500;
 }

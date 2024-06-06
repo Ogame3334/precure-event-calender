@@ -28,6 +28,9 @@ const Calendar: React.FC = () => {
       events={[
         { title: 'イベント 1', start: '2024-06-01', end: '2024-06-05' }
       ]}
+      editable={true}
+      selectable={true}
+      // dateClick={}
     />
   );
 };
