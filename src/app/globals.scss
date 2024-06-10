@@ -45,6 +45,10 @@ input {
   @apply bg-pink-600;
 }
 
+.fc .fc-highlight{
+  @apply bg-pink-50
+}
+
 .fc .fc-button-primary:disabled {
   @apply bg-pink-200;
 }
@@ -52,13 +56,17 @@ input {
   @apply bg-pink-500 border border-pink-600 ; 
 }
 
+.fc .fc-media-screen {
+  @apply max-h-14
+}
+
 .ReactModal__Overlay--after-open{
   @apply z-50;
 }
 
-.ReactModal__Body--open {
+/* .ReactModal__Body--open {
   overflow: hidden;
-}
+} */
 
 .fc-day-sat a {
   @apply text-blue-500;
