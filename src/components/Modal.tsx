@@ -1,23 +1,7 @@
 "use client"
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin, { Draggable, DropArg } from '@fullcalendar/interaction'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import React, { Fragment, useEffect, useState } from 'react'
-import { Button, Dialog, Transition } from '@headlessui/react'
-import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
-import { EventSourceInput } from '@fullcalendar/core/index.js'
-import jaLocale from '@fullcalendar/core/locales/ja';
-import Calendar from '../components/Calendar'
+import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { ReactNode } from 'react'
-
-interface Event {
-  title: string;
-  start: Date | string;
-  allday: boolean;
-  id: number;
-}
 
 interface CustomModalProps {
   button: ReactNode;

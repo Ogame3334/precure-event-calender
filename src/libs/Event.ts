@@ -8,6 +8,7 @@ export default interface Event {
     endStr?: string;
     title: string;
     url?: string;
+    place?: string;
     classNames?: string;
     editable?: boolean;
 };

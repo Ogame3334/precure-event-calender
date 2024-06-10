@@ -9,6 +9,7 @@ import ReactModal from 'react-modal';
 import { EventImpl } from '@fullcalendar/core/internal';
 import { useSearchParams } from 'next/navigation';
 import Event from '../libs/Event';
+import CustomMap from './CustomMap';
 
 const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dateClick}) => {
   const searchParams = useSearchParams();
@@ -16,19 +17,56 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
   const [isOpenEvent, setIsOpenEvent ] = useState(false);
   const [event, setEvent ] = useState<EventImpl>();
 
+  const MinusDate = (date: Date | null) => {
+    if(!date) return new Date();
+    const temp = date;
+    temp.setDate(temp.getDate() - 1);
+    return temp;
+  }
+  const FormatDate = (date: Date | null) => {
+    if(!date) return <></>;
+    return (
+      <p>
+        {`${date.getFullYear()}年`}
+        <br/>
+        {`${date.getMonth()}月${date.getDate()}日`}
+      </p>
+    )
+  };
+  const FormatDateLine = (date: Date | null) => {
+    if(!date) return <></>;
+    return (
+      <p>
+        {`${date.getFullYear()}年`}
+        {`${date.getMonth()}月${date.getDate()}日`}
+      </p>
+    )
+  };
+  const FormatDatetime = (date: Date | null) => {
+    if(!date) return <></>;
+    return (
+      <p>
+        {`${date.getFullYear()}年`}
+        {`${date.getMonth()}月${date.getDate()}日`}
+        <br/>
+        {`${date.getHours().toString().padStart(2, '0')}時${date.getMinutes().toString().padStart(2, '0')}分`}
+      </p>
+    )
+  };
+
   let clickCount = 0;
   
   const modalStyle : ReactModal.Styles = {
     content: {
       // position: 'absolute',
       width: '50%',
-      height: '50%',
+      height: '80%',
       top: '50%',
       left: '50%',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       borderRadius: '20px',
-      overflow: 'hidden', 
+      overflow: 'scroll', 
       overflowX: 'hidden'
     },
     overlay: {
@@ -56,7 +94,6 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
           return args.dayNumberText.replace('日', '');
         }}
         events={events}
-        selectable={true}
         height={700}
         dateClick={(e)=>{
           clickCount++;
@@ -74,6 +111,7 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
         }}
         eventClick={(e)=>{setIsOpenEvent(true); setEvent(e.event)}}
       />
+      {event ? 
       <ReactModal 
         isOpen={isOpenEvent} 
         onRequestClose={()=>{setIsOpenEvent(false);}} 
@@ -85,10 +123,32 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
               <img src='/close.svg' className='w-full'></img>
           </button>
         </div>
-        <div>
-          <h1 className='text-center text-2xl'>{(event) ? event.title : 'タイトル'}</h1>
+        <div className='h-full'>
+          <h1 className='text-center text-2xl'>{(event.title) ? event.title : 'タイトル'}</h1>
+          <div className='grid grid-cols-7 text-center my-3'>
+            {event.allDay ? 
+              (new Date(event.startStr).toDateString() == MinusDate(new Date(event.endStr)).toDateString() ? 
+                <div className='col-span-7 text-xl'>{FormatDateLine(event.start)}</div> : 
+                <>
+                  <div className='col-span-3'>{FormatDate(event.start)}</div>
+                  <div className='col-span-1'></div>
+                  <div className='col-span-3'>{FormatDate(MinusDate(event.end))}</div>
+                </>
+              ) : 
+              <>
+                <div className='col-span-3'>{FormatDatetime(event.start)}</div>
+                <div className='col-span-1'></div>
+                <div className='col-span-3'>{FormatDatetime(event.end)}</div>
+              </>
+            }
+          </div>
+          <div>{event.extendedProps.place}</div>
+          <div className='m-10 h-1/2'>
+            <CustomMap place_name='九州工業大学' />
+          </div>
         </div>
-      </ReactModal>
+      </ReactModal> : <></>
+      }
     </>
   );
 };

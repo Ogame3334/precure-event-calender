@@ -4,16 +4,47 @@
 
 :root {
   @apply bg-gray-50;
+  --color-v: 333;
+  --header-bg-color: hsl(var(--color-v), 100%, 50%);
+
+  --fc-small-font-size: .85em;
+  --fc-page-bg-color: #fff;
+  --fc-neutral-bg-color: hsla(0,0%,82%,.3);
+  --fc-neutral-text-color: grey;
+  --fc-border-color: #ddd;
+  --fc-button-text-color: #000;
+  --fc-button-bg-color: hsl(var(--color-v), 100%, 74%);
+  --fc-button-border-color: hsl(var(--color-v), 100%, 24%);
+  --fc-button-hover-bg-color: hsl(var(--color-v), 100%, 65%);
+  --fc-button-hover-border-color: #1a252f;
+  --fc-button-active-bg-color: hsl(var(--color-v) 70% 50%);
+  --fc-button-active-border-color: #151e27;
+  --fc-event-bg-color: var(--fc-button-hover-bg-color);
+  --fc-event-border-color: var(--fc-button-active-bg-color);
+  --fc-event-text-color: #000;
+  --fc-event-selected-overlay-color: rgba(0,0,0,.25);
+  --fc-more-link-bg-color: #d0d0d0;
+  --fc-more-link-text-color: inherit;
+  --fc-event-resizer-thickness: 8px;
+  --fc-event-resizer-dot-total-width: 8px;
+  --fc-event-resizer-dot-border-width: 1px;
+  --fc-non-business-color: hsla(0,0%,84%,.3);
+  --fc-bg-event-color: #8fdf82;
+  --fc-bg-event-opacity: 0.3;
+  --fc-highlight-color: rgba(188,232,241,.3);
+  --fc-today-bg-color: rgba(255,220,40,.15);
+  --fc-now-indicator-color: red;
 }
 
 input {
   @apply px-2;
 }
-  .fc-header-toolbar {
-    display: inline-block;
-    padding: 4px 4px;
-    
-    @apply space-x-8;
+
+.fc-header-toolbar {
+  display: inline-block;
+  padding: 4px 4px;
+  
+  @apply space-x-8;
 }
 
 .fc-day {
@@ -28,40 +59,38 @@ input {
   @apply w-full h-full lg:h-3/4 xl:h-2/3 bg-white;
 }
 
-.fc-h-event {
-  @apply bg-pink-500 border border-pink-600 ;
-  
-}
-
-.fc .fc-daygrid-day.fc-day-today {
-  @apply bg-pink-200 ;
-}
-
-.fc .fc-button{
-  @apply bg-pink-400 hover:bg-pink-500;
-}
-
-.fc .fc-button-primary:not(:disabled).fc-button-active {
-  @apply bg-pink-600;
-}
-
-.fc .fc-highlight{
-  @apply bg-pink-50
-}
-
-.fc .fc-button-primary:disabled {
-  @apply bg-pink-200;
-}
-.fc-v-event {
-  @apply bg-pink-500 border border-pink-600 ; 
-}
-
 .fc .fc-media-screen {
   @apply max-h-14
 }
 
 .ReactModal__Overlay--after-open{
   @apply z-50;
+}
+
+.fc .fc-button{
+  /* filter: url('/outline.svg#filter'); */
+  text-shadow: #fff 0 0 3px, #fff 0 0 3px;
+}
+
+.round-button{
+  background-color: var(--fc-button-bg-color);
+  border-color: var(--fc-button-border-color);
+  color: var(--fc-button-text-color);
+}
+.round-button:hover{
+  background-color: var(--fc-button-hover-bg-color);
+  border-color: var(--fc-button-hover-border-color);
+  color: var(--fc-button-text-color);
+}
+.round-button:active{
+  background-color: var(--fc-button-active-bg-color);
+  border-color: var(--fc-button-active-border-color);
+  color: var(--fc-button-text-color);
+}
+
+.page-header{
+  background-color: hsl(var(--color-v), 100%, 85%);
+  border-color: hsl(var(--color-v), 100%, 80%);
 }
 
 /* .ReactModal__Body--open {
