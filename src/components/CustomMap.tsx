@@ -1,30 +1,29 @@
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { useEffect, useState } from "react";
 
 interface CustomMapProps {
-  place_name: string;
+  place_id: string;
+}
+
+interface GoogleMapCenter {
+  lat: number;
+  lng: number;
 }
 
 export default function CustomMap(props: CustomMapProps) {
-  // const searchPlace = async () => {
-  //   try {
-  //     const response = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${props.place_name}&key=${process.env.GOOGLEMAP_APIKEY}`);
-  //     const data = await response.json();
-      
-  //   }
-  // }
-
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLEMAP_APIKEY || '';
-  
+
+  const API_GET_URL = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=place_id:${encodeURIComponent(props.place_id)}`;
+
   return (
     <>
-      <LoadScript googleMapsApiKey={API_KEY}>
-        <GoogleMap
-          mapContainerStyle={{width: '100%', height: '100%'}}
-          center={{lat: 34.72, lng: 135.49}}
-          zoom={13} 
-          
-          />
-      </LoadScript>
+      <iframe
+      width={'100%'}
+      height={'100%'}
+      // frameBorder=""
+      style={{ border: 0 }}
+      src={API_GET_URL}
+      allowFullScreen
+    ></iframe>
     </>
   );
 }

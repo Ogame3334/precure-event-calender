@@ -9,6 +9,7 @@ export default interface Event {
     title: string;
     url?: string;
     place?: string;
+    place_id?: string;
     classNames?: string;
     editable?: boolean;
 };

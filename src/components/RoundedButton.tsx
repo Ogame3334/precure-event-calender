@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export default function RoundedButton({onClick, children}: {onClick: Function, children: ReactNode}) {
     return (<button 
-    className="round-button w-10/12 rounded-full px-4 py-2 border my-5 mx-10" 
+    className="round-button w-11/12 rounded-full px-4 py-2 border my-5 mx-10" 
     onClick={()=>{onClick()}}
     role="button"
     >

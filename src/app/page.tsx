@@ -12,9 +12,9 @@ export default function Home() {
   const [ events, setEvents ] = useState<Event[]>([
     { id: '1000', title: 'イベント 1', start: '2024-06-01T00:00:00', end: '2024-06-06T00:00:00', allDay: true },
     { id: '1001', title: 'イベント 2', start: '2024-06-01', end: '2024-06-05', allDay: true },
-    { id: '1001', title: 'イベント 3', start: '2024-06-07', end: '2024-06-08', allDay: true },
+    { id: '1002', title: 'イベント 3', start: '2024-06-07', end: '2024-06-08', allDay: true },
     { id: '1003', title: 'イベント 4', start: '2024-06-11T00:00:00', end: '2024-06-11T08:30:00', allDay: false },
-    { id: '1003', title: 'イベント 5', start: '2024-06-13T08:00:00', end: '2024-06-13T10:30:00', allDay: false }
+    { id: '1004', title: 'イベント 5', start: '2024-06-13T08:00:00', end: '2024-06-13T10:30:00', allDay: false }
   ]);
   const [ isOpenAddEventModal, setIsOpenAddEventModal ] = useState(false);
   const [ startDateAddEvent, setStartDateAddEvent ] = useState<Date>(new Date());
@@ -28,13 +28,13 @@ export default function Home() {
 
   return (
     <>
-      <nav className="mb-12 border-b p-4 page-header">
-        <h1 className="text-center font-bold text-2xl text-gray-700">
+      <nav className="md:mb-12 border-b p-4 page-header">
+        <h1 className="text-center font-bold text-base md:text-2xl text-gray-700">
           プリキュアイベントカレンダー
         </h1>
       </nav>
-      <main className="flex min-h-screen flex-col items-center justify-between p-10">
-        <div className="grid grid-cols-10 w-full">
+      <main className="flex min-h-screen flex-col items-center justify-between p-5 md:p-10">
+        <div className="md:grid grid-cols-10 w-full">
           <div className="col-span-2">
           </div>
           <div className="col-span-6">

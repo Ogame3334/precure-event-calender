@@ -47,8 +47,16 @@ input {
   @apply space-x-8;
 }
 
-.fc-day {
-  @apply m-8;
+.fc-header-toolbar > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0.5;
+}
+
+.fc .fc-toolbar-title{
+  @apply text-sm md:text-2xl;
+}
+
+.fc .fc-day {
+  @apply m-8 ;
 }
 
 .fc-scrollgrid-sync-table {
@@ -67,8 +75,13 @@ input {
   @apply z-50;
 }
 
+.ReactModal__Content--after-open {
+  @apply w-11/12 md:w-1/2 h-5/6 md:h-5/6;
+}
+
 .fc .fc-button{
   /* filter: url('/outline.svg#filter'); */
+  @apply text-[10px] md:text-base p-1 md:p-2;
   text-shadow: #fff 0 0 3px, #fff 0 0 3px;
 }
 

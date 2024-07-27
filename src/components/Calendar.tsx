@@ -58,9 +58,9 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
   
   const modalStyle : ReactModal.Styles = {
     content: {
-      // position: 'absolute',
-      width: '50%',
-      height: '80%',
+      position: 'absolute',
+      // width: '50%',
+      // height: '80%',
       top: '50%',
       left: '50%',
       marginRight: '-50%',
@@ -94,7 +94,7 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
           return args.dayNumberText.replace('日', '');
         }}
         events={events}
-        height={700}
+        height={500}
         dateClick={(e)=>{
           clickCount++;
           if(clickCount <= 2){
@@ -144,7 +144,7 @@ const Calendar: React.FC<{events: Event[], dateClick: Function}> = ({events, dat
           </div>
           <div>{event.extendedProps.place}</div>
           <div className='m-10 h-1/2'>
-            <CustomMap place_name='九州工業大学' />
+            <CustomMap place_id={event.extendedProps.place_id || 'ChIJTQbYAg2MGGARt22eNwtfGtE'} />
           </div>
         </div>
       </ReactModal> : <></>
