@@ -1,0 +1,4 @@
+.create_panel{
+    background-color: hsl(var(--color-v), 100%, 95%);
+    outline-color: hsl(var(--color-v), 100%, 80%);
+}

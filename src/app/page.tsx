@@ -28,11 +28,6 @@ export default function Home() {
 
   return (
     <>
-      <nav className="md:mb-12 border-b p-4 page-header">
-        <h1 className="text-center font-bold text-base md:text-2xl text-gray-700">
-          プリキュアイベントカレンダー
-        </h1>
-      </nav>
       <main className="flex min-h-screen flex-col items-center justify-between p-5 md:p-10">
         <div className="md:grid grid-cols-10 w-full">
           <div className="col-span-2">

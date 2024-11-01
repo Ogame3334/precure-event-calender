@@ -4,6 +4,7 @@ import ReactModal from 'react-modal'
 import ToggleButton from './ToggleButton'
 import Event from '../libs/Event'
 import RoundedButton from './RoundedButton'
+import './Modal.css'
 
 interface AddEventModalProperty {
   isOpen: boolean;
@@ -76,6 +77,7 @@ export default function AddEventModal(props: AddEventModalProperty) {
         isOpen={props.isOpen}
         onRequestClose={() => { props.handleClose() }}
         style={modalStyle}
+        className="modal-content"
         onAfterOpen={() => {
           setStartDate(props.startDate.toLocaleDateString('sv-SE'));
           setEndDate(props.startDate.toLocaleDateString('sv-SE'));

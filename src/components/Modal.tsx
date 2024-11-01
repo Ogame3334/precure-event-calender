@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import { ReactNode } from 'react'
+import './Modal.scss'
 
 interface CustomModalProps {
   button: ReactNode;
@@ -55,6 +56,7 @@ export default function CustomModal(props: CustomModalProps) {
         isOpen={isOpen} 
         onRequestClose={handleClose} 
         style={modalStyle}
+        // className="modal-content"
         >
         <div className='w-full text-right'>
           <button onClick={handleClose} className='w-[3%]'>

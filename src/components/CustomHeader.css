@@ -1,0 +1,56 @@
+@charset "utf-8";
+/*==================================================
+　5-2-1 3本線が×に
+===================================*/
+/*ボタン外側※レイアウトによってpositionや形状は適宜変更してください*/
+.burgerbtn{
+  position: relative;/*ボタン内側の基点となるためrelativeを指定*/
+  cursor: pointer;
+    width: 50px;
+    height:50px;
+  border-radius: 9999px;
+}
+
+/*ボタン内側*/
+.burgerbtn span{
+    display: inline-block;
+    transition: all .4s;/*アニメーションの設定*/
+    position: absolute;
+    left: 8px;
+    height: 3px;
+    border-radius: 9999px;
+  background: rgb(54 83 20);
+    width: 70%;
+  }
+
+.burgerbtn span:nth-of-type(1) {
+  top:10px; 
+}
+
+.burgerbtn span:nth-of-type(2) {
+  top:23px;
+}
+
+.burgerbtn span:nth-of-type(3) {
+  top:36px;
+}
+
+/*activeクラスが付与されると線が回転して×に*/
+
+.burgerbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 11px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 60%;
+}
+
+.burgerbtn.active span:nth-of-type(2) {
+  opacity: 0;/*真ん中の線は透過*/
+}
+
+.burgerbtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 11px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 60%;
+}
