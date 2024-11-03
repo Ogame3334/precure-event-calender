@@ -7,7 +7,8 @@ services:
     volumes:
       - .:/root/product
     ports:
-      - "3000:3000"
+      - 3000:3000
+      - 5555:5555
     networks:
       - app-net
   db:
@@ -15,6 +16,7 @@ services:
     container_name: precale_database
     volumes:
       - dbdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
     env_file:
       - ./.env.local
     networks:
