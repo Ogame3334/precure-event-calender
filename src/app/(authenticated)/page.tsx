@@ -1,10 +1,10 @@
 "use client"
 import { useState } from 'react'
-import Calendar from '../components/Calendar'
+import Calendar from '../../components/Calendar'
 import ReactModal from 'react-modal'
-import AddEventModal from '../components/AddEventModal'
-import RoundedButton from '../components/RoundedButton'
-import Event from '../libs/Event'
+import AddEventModal from '../../components/AddEventModal'
+import RoundedButton from '../../components/RoundedButton'
+import Event from '../../libs/Event'
 
 ReactModal.setAppElement('body');
 

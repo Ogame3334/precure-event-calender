@@ -1,36 +1,37 @@
-import TwitterProvider from "next-auth/providers/twitter";
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
 
-import type { Account, NextAuthOptions, Profile, User } from "next-auth";
-
-export const nextAuthOptions: NextAuthOptions = {
-    debug: true,
-    session: {strategy: "jwt"},
-    providers: [
-        TwitterProvider({
-            clientId: process.env.TWITTER_CLIENT_ID!,
-            clientSecret: process.env.TWITTER_CLIENT_SECRET!,
-          })
-    ],
-    callbacks: {
-        jwt: async ({token, user, account, profile}) => {
-            if(user){
-                token.user = user;
-                const u = user as any;
-                token.role = u.role;
-            }
-            if(account){
-                token.accessToken = account.access_token;
-            }
-            return token;
+const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login"
+  },
+  providers: [
+    CredentialsProvider({
+      name: 'Ninjin Sirisiri',
+      credentials: {
+        id: {
+          label: 'Id',
+          type: 'text',
         },
-        session: ({session, token}) => {
-            return {
-                ...session,
-                user: {
-                    ...session.user,
-                    role: token.role
-                }
-            };
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+        // credentials に入力が渡ってくる
+        // id, password はここでベタ打ちして検証している
+        const matched =
+          credentials?.id === 'id' && 
+          credentials?.password === 'password'
+        if (matched) {
+          // 今回は null を返さなければなんでもよいので適当
+          return {
+            id: '29472084752894723890248902',
+          }
+        } else {
+          return null
         }
-    }
+      },
+    }),
+  ],
 }
+
+export { authOptions }

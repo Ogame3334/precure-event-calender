@@ -6,6 +6,7 @@ import { ReactNode, useState } from "react"
 import './CustomHeader.css'
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import AccountButton from "./AccountButton"
 
 interface LinkButtonProps{
   href: string;
@@ -47,16 +48,20 @@ const CustomHeader = ({ session }: { session: Session | null }) => {
           />
         </Link>
         <div className="flex items-center">
-          <button onClick={() => { setIsOpenedMenu(!isOpenedMenu) }}>
-            <div
-              className={"burgerbtn " + (isOpenedMenu ? "active" : "")}
-              onClick={() => { setIsOpenedMenu(!isOpenedMenu) }}
-            >
-              <span />
-              <span />
-              <span />
-            </div>
-          </button>
+          <AccountButton session={session}/>
+          <div className="flex items-center">
+            <button onClick={() => { setIsOpenedMenu(!isOpenedMenu) }}>
+              <div
+                className={"burgerbtn " + (isOpenedMenu ? "active" : "")}
+                onClick={() => { setIsOpenedMenu(!isOpenedMenu) }}
+              >
+                <span />
+                <span />
+                <span />
+              </div>
+            </button>
+          </div>
+
         </div>
       </div>
       {/* z-indexが上手くいかないよ～～～ */}
