@@ -49,7 +49,7 @@ const CustomHeader = ({ session }: { session: Session | null }) => {
         </Link>
         <div className="flex items-center">
           <AccountButton session={session}/>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <button onClick={() => { setIsOpenedMenu(!isOpenedMenu) }}>
               <div
                 className={"burgerbtn " + (isOpenedMenu ? "active" : "")}
@@ -60,12 +60,11 @@ const CustomHeader = ({ session }: { session: Session | null }) => {
                 <span />
               </div>
             </button>
-          </div>
+          </div> */}
 
         </div>
       </div>
-      {/* z-indexが上手くいかないよ～～～ */}
-      <div className={`fixed top-14 ${isOpenedMenu ? "left-0" : "left-full"} w-full h-full header-menu z-40 transition-all duration-500`}>
+      {/* <div className={`fixed top-14 ${isOpenedMenu ? "left-0" : "left-full"} w-full h-full header-menu z-40 transition-all duration-500`}>
         <div className="m-10 flex flex-col">
           <LinkButton href="/">
             TOP
@@ -74,7 +73,7 @@ const CustomHeader = ({ session }: { session: Session | null }) => {
             マイページ
           </LinkButton>
         </div>
-      </div>
+      </div> */}
     </header>
   )
 }

@@ -6,6 +6,7 @@ import { getServerSession, Session } from "next-auth";
 import { useState } from "react";
 import NextAuthProvider from "../providers";
 import { authOptions } from "@/src/libs/next-auth-options";
+import { Sidebar } from "@/src/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,8 +27,11 @@ export default async function RootLayout({
       <body className={inter.className}>
         <NextAuthProvider>
           <CustomHeader session={session} />
+          <Sidebar session={session}/>
+          <div className="mr-12">
           <div className="h-14" />
           {children}
+          </div>
         </NextAuthProvider>
       </body>
     </html>
