@@ -5,10 +5,13 @@ import ReactModal from 'react-modal'
 import AddEventModal from '../../components/AddEventModal'
 import RoundedButton from '../../components/RoundedButton'
 import Event from '../../libs/Event'
+import { Session } from 'inspector'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/src/libs/next-auth-options'
 
 ReactModal.setAppElement('body');
 
-export default function Home() {
+export default async function Home() {
   const [ events, setEvents ] = useState<Event[]>([
     { id: '1000', title: 'イベント 1', start: '2024-06-01T00:00:00', end: '2024-06-06T00:00:00', allDay: true },
     { id: '1001', title: 'イベント 2', start: '2024-06-01', end: '2024-06-05', allDay: true },
@@ -26,6 +29,8 @@ export default function Home() {
     setIsOpenAddEventModal(false);
   }
 
+  const session: Session | null = await getServerSession(authOptions);
+
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-between p-5 md:p-10">
@@ -38,24 +43,19 @@ export default function Home() {
               events={events} />
           </div>
           <div className="col-span-2">
+            {session ? 
           <RoundedButton
             onClick={()=>{setStartDateAddEvent(new Date()); handleOpenAddEventModal();}}
             >
             追加
           </RoundedButton>
-          <input type='range' min={0} max={360} onChange={(e)=>{
+          :
+          <></>}
+          {/* <input type='range' min={0} max={360} onChange={(e)=>{
             document.body.style.setProperty('--color-v', e.target.value);
             document.documentElement.style.setProperty('--color-v', e.target.value);
-          }}></input>
+          }}></input> */}
           {/* <button onClick={()=>console.log(events)}>表示</button> */}
-          <AddEventModal 
-            isOpen={isOpenAddEventModal}
-            handleOpen={()=>{handleOpenAddEventModal()}}
-            handleClose={handleCloseAddEventModal}
-            startDate={startDateAddEvent}
-            setEvents={setEvents}
-            events={events}
-          />
           </div>
         </div>
       </main>

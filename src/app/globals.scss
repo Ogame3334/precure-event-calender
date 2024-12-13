@@ -102,8 +102,9 @@ input {
 }
 
 .page-header{
-  background-color: hsl(var(--color-v), 100%, 85%);
-  border-color: hsl(var(--color-v), 100%, 80%);
+  @apply bg-pink-200 border-none;
+  /* background-color: hsl(var(--color-v), 100%, 85%); */
+  /* border-color: hsl(var(--color-v), 100%, 80%); */
 }
 
 .header-menu{

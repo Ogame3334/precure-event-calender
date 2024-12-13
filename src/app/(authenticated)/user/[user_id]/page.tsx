@@ -12,6 +12,7 @@ export default function Home(){
         "", "", ""
     ]);
     const [events, setEvents] = useState<number[]>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    const [isPastEvent, setIsPastEvent] = useState<boolean>(false);
 
     const params = useParams();
 
@@ -82,20 +83,33 @@ export default function Home(){
             </div>
             <div className="py-5">
                 <div className="text-xl text-center">
-                    参加イベント 15
+                    イベント 15
+                </div>
+                <div className="py-2 flex justify-center">
+                    <div onClick={()=>setIsPastEvent(false)} className={"p-1 transition-all " + (isPastEvent ? " border-none" : " border-b border-b-pink-400")}>
+                        参加予定
+                    </div>
+                    <div onClick={()=>setIsPastEvent(true)} className={"p-1 transition-all " + (!isPastEvent ? " border-none" : " border-b border-b-pink-400")}>
+                        過去のイベント
+                    </div>
                 </div>
                 <div className="p-2">
                     {events.map(event => (
-                        <div className="p-2 my-2 outline outline-1 outline-gray-400 rounded-md bg-white active:bg-gray-100">
-                            <div className="">
+                        <Link href={`/event/${event}`}>
+                        <div
+                             className="p-2 my-2 outline outline-1 outline-gray-400 rounded-md bg-white active:bg-gray-100 transition-colors">
+                            <div className="text-xl">
                                 イベント名
                             </div>
                             <div className="text-sm text-right">
                                 2024/12/25
                             </div>
-                            <div></div>
+                            <div className="text-sm">
+                                ほげほげホール
+                            </div>
                             <div></div>
                         </div>
+                        </Link>
                     ))}
                 </div>
             </div>

@@ -20,7 +20,7 @@ export default function AccountButton({session}: {session: Session | null}){
                 </div>
             ) : (
                 <div>
-                    <Link href={"/login"}>ログイン</Link>
+                    <Link href={"/signin"}>ログイン</Link>
                 </div>
             )}
         </div>
