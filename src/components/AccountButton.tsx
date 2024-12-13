@@ -7,7 +7,7 @@ export default function AccountButton({session}: {session: Session | null}){
         <div>
             {session ? (
                 <div>
-                    <button>
+                    <Link href={session.user?.name || "/user/ogame"}>
                         <Image 
                             width={40}
                             height={40}
@@ -16,7 +16,7 @@ export default function AccountButton({session}: {session: Session | null}){
                             src={session.user?.image ?? ""}
                             className="rounded-full"
                         />
-                    </button>
+                    </Link>
                 </div>
             ) : (
                 <div>
