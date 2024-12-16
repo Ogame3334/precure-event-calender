@@ -1,9 +1,8 @@
 "use client"
 
 import { signIn, useSession } from "next-auth/react"
-import Image from "next/image";
 import Link from "next/link";
-import { redirect, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 
 
@@ -15,13 +14,17 @@ export default function LoginPage() {
   const [canLogin, setCanLogin] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
+
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("callbackUrl") || "/";
+  const router = useRouter();
 
 
   useEffect(() => {
     if (status == "authenticated") {
-      redirect(redirectUrl);
+      setIsRedirecting(true);
+      router.push(redirectUrl);
     }
   }, [session, status]);
 
@@ -42,11 +45,20 @@ export default function LoginPage() {
       callbackUrl: redirectUrl
     });
     if (result?.ok) {
-      redirect(redirectUrl);
+      setIsRedirecting(true);
+      router.push(redirectUrl);
     }
     else {
       setErrorMessage(result?.error || "");
     }
+  }
+
+  if(isRedirecting){
+    return (
+      <div className="text-center text-xl">
+        リダイレクト中……
+      </div>
+    )
   }
 
   return (
