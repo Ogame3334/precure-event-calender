@@ -3,17 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function AccountButton({session}: {session: Session | null}){
+    console.log(session?.user);
     return (
         <div>
             {session ? (
                 <div>
-                    <Link href={session.user?.name || "/user/ogame"}>
+                    <Link href={`/user/${session.user.displayId}`}>
                         <Image 
                             width={40}
                             height={40}
                             alt="icon"
                             // src={"/sample/img/icon.png"}
-                            src={session.user?.image ?? ""}
+                            src={session.user.iconSrc}
                             className="rounded-full"
                         />
                     </Link>

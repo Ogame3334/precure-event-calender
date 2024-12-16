@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
-import "../globals.scss";
-import NextAuthProvider from "../providers";
+import { Inter } from "next/font/google";
+import "../../globals.scss"
+import NextAuthProvider from "../../providers";
 import Image from "next/image";
 
-// const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body /*className={inter.className}*/>
+      <body className={inter.className}>
         <NextAuthProvider>
           <div className="w-full h-screen flex items-center p-3">
                 <div className="w-5/6 md:w-1/2 p-5 bg-pink-50 shadow-lg rounded-md outline outline-1 outline-pink-200 mx-auto">

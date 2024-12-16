@@ -13,9 +13,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id  Int   @id @default(autoincrement())
-  user_id   String  @unique
+model Users {
+  id  Int   @id @default(autoincrement()) @unique
+  displayId   String  @unique 
   name    String
-  icon_src  String
+  iconSrc  String 
+  description String @default("")
+  follows   Int[]
+  followers   Int[]
+  links String[]
+  events  Events[]
+  createdAt  DateTime @default(now()) 
+  updatedAt  DateTime @updatedAt 
+
+  authentication UserAuthentications?
+}
+
+model UserAuthentications {
+  id Int @id @default(autoincrement()) @unique
+  userId Int @unique 
+  user Users  @relation(fields: [userId], references: [id])
+  email String @unique
+  passwordHash String 
+  createdAt  DateTime @default(now()) 
+  updatedAt  DateTime @updatedAt 
+}
+
+model Events{
+  id Int @id @default(autoincrement()) @unique
+  users Users[]
+  eventId    String @unique
+  title   String
+  startTime  DateTime
+  endTime  DateTime
+  url String
+  createdAt  DateTime @default(now()) 
+  updatedAt  DateTime @updatedAt 
+
+  oldVersions OldversionEvents[]
+}
+
+model OldversionEvents {
+  id Int @id @default(autoincrement()) @unique
+  // users は要らないので削除
+  eventId    String @unique
+  title   String
+  startTime  DateTime
+  endTime  DateTime
+  url String
+  createdAt  DateTime @default(now()) 
+  updatedAt  DateTime @updatedAt 
+
+  eventIdRef Int
+  event   Events @relation(fields: [eventIdRef], references: [id])
 }

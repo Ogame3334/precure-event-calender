@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <div className={styles.create_panel + " grid grid-cols-6 grid-rows-6 items-center md:m-10 p-3 md:p-10 md:rounded-xl outline outline-1"}>
+        <div className={styles.create_panel + " m-2 grid grid-cols-6 grid-rows-6 items-center md:m-10 p-3 md:p-10 md:rounded-xl outline outline-1"}>
           <div className="p-1">タイトル</div>
           <div className="col-span-5 p-1">
             <input

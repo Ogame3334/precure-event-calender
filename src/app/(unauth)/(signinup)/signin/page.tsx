@@ -18,6 +18,7 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("callbackUrl") || "/";
 
+
   useEffect(() => {
     if (status == "authenticated") {
       redirect(redirectUrl);
@@ -35,14 +36,16 @@ export default function LoginPage() {
     console.log("logining");
     event.preventDefault();
     const result = await signIn("credentials", {
-      redirect: true,
+      redirect: false,
       id: email,
       password: password,
       callbackUrl: redirectUrl
     });
-
     if (result?.ok) {
       redirect(redirectUrl);
+    }
+    else {
+      setErrorMessage(result?.error || "");
     }
   }
 

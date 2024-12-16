@@ -9,14 +9,14 @@ const Sidebar = ({ session }: { session: Session | null }) => {
         <div className="h-14" />
             <Link href={"/"} className="w-12 h-12">
                 <Image 
-                    src={"/ogame.jpg"}
+                    src={"/img/logos/calendar.svg"}
                     alt="calendar"
-                    width={30}
-                    height={30}
-                    className="m-[9px]"
+                    width={26}
+                    height={26}
+                    className="m-[11px]"
                 />
             </Link>
-            <Link href={"/notification"} className="w-12 h-12">
+            {/* <Link href={"/notification"} className="w-12 h-12">
                 <Image 
                     src={"/ogame.jpg"}
                     alt="calendar"
@@ -24,7 +24,7 @@ const Sidebar = ({ session }: { session: Session | null }) => {
                     height={30}
                     className="m-[9px]"
                 />
-            </Link>
+            </Link> */}
         </div>
         </>
     )
