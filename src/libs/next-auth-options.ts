@@ -6,6 +6,8 @@ import { NextResponse } from 'next/server'
 import { hashPassword } from './CustomHash'
 import bcrypt from 'bcrypt'
 
+const prisma = new PrismaClient();
+
 function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -39,7 +41,7 @@ const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if(!credentials) throw new Error('認証情報がありません。');
         
-        const prisma = new PrismaClient();
+        
 
         const userWithAuth = await prisma.users.findFirst({
           where: {OR: [

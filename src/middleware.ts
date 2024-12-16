@@ -1,8 +1,19 @@
-export { default } from 'next-auth/middleware'
+// /src/middleware.ts
+
+import { withAuth } from 'next-auth/middleware';  
+
+export default withAuth({
+    callbacks: {
+        authorized: ({ token }) => {
+            console.log("Token:", token);
+            return !!token;
+        },
+    },
+    pages: {
+        signIn: '/signin',
+    },
+});
 
 export const config = {
-  // api と signin は未認証でも使いたいので弾く
-  // _next は web フォントの読み込み等でも middleware が反応していたので除外してみた
-//   matcher: ['/((?!api|signin|_next).*)'],
-  matcher: ['/create'],
-}
+    matcher: ['/create', '/setting'],
+};
