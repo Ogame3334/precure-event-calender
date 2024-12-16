@@ -23,17 +23,15 @@ export default async function RootLayout({
   const session: Session | null = await getServerSession(authOptions);
 
   return (
-    <html lang="en">
-      <body className="bg-pink-50"/*className={inter.className}*/>
-        <NextAuthProvider>
-          <CustomHeader session={session} />
-          <Sidebar session={session}/>
-          <div className="mr-12">
-            <div className="h-14" />
-            {children}
-          </div>
-        </NextAuthProvider>
-      </body>
-    </html>
+    <div className="bg-pink-50">
+      <NextAuthProvider>
+        <CustomHeader session={session} />
+        <Sidebar session={session} />
+        <div className="mr-12">
+          <div className="h-14" />
+          {children}
+        </div>
+      </NextAuthProvider>
+    </div>
   );
 }

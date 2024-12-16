@@ -18,20 +18,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-          <div className="w-full h-screen flex items-center p-3">
-                <div className="w-5/6 md:w-1/2 p-5 bg-pink-50 shadow-lg rounded-md outline outline-1 outline-pink-200 mx-auto">
-                  <div className="flex justify-center py-6">
-                    <Image
-                      src="/precale_logo.png"
-                      width={100}
-                      height={50}
-                      alt="PreCaleLogo"
-                      className="w-36"
-                    />
-                  </div>
-          {children}
-          </div>
-          </div>
+        {children}
       </body>
     </html>
   );
