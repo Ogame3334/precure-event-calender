@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function LoginPage() {
   const { data: session, status } = useSession();
 
-  const [email, setEmail] = useState("");
+  const [displayIdOrEmail, setDisplayIdOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [canLogin, setCanLogin] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -26,18 +26,18 @@ export default function LoginPage() {
   }, [session, status]);
 
   useEffect(() => {
-    if (email !== "" && password !== "")
+    if (displayIdOrEmail !== "" && password !== "")
       setCanLogin(true);
     else
       setCanLogin(false);
-  }, [email, password])
+  }, [displayIdOrEmail, password])
 
   const handleLogin = async (event: React.MouseEvent) => {
     console.log("logining");
     event.preventDefault();
     const result = await signIn("credentials", {
       redirect: false,
-      id: email,
+      id: displayIdOrEmail,
       password: password,
       callbackUrl: redirectUrl
     });
@@ -54,19 +54,19 @@ export default function LoginPage() {
       <div className="p-5 text-xl text-center">
         ログイン
       </div>
-      <div className="text-xs px-2">
-        メールアドレス
+      <div className="text-sm px-2">
+        ユーザーID <span className="text-xs">または</span> メールアドレス 
       </div>
       <div className="p-2">
         <input
           type="text"
           className="w-full p-2 text-sm rounded-sm outline outline-1 outline-pink-100"
-          value={email}
-          placeholder="otter@example.com"
-          onChange={e => setEmail(e.target.value)}
+          value={displayIdOrEmail}
+          placeholder="UserID or user@example.com"
+          onChange={e => setDisplayIdOrEmail(e.target.value)}
         />
       </div>
-      <div className="text-xs px-2">
+      <div className="text-sm px-2">
         パスワード
       </div>
       <div className="p-2">
