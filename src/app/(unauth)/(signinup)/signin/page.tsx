@@ -46,7 +46,7 @@ export default function LoginPage() {
     });
     if (result?.ok) {
       setIsRedirecting(true);
-      router.push(redirectUrl);
+      // router.push(redirectUrl);
     }
     else {
       setErrorMessage(result?.error || "");

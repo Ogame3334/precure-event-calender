@@ -25,8 +25,8 @@ export default async function RootLayout({
   return (
     <div className="bg-pink-50">
       <NextAuthProvider>
-        <CustomHeader session={session} />
-        <Sidebar session={session} />
+        <CustomHeader />
+        <Sidebar />
         <div className="mr-12">
           <div className="h-14" />
           {children}

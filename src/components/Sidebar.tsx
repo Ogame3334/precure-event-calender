@@ -1,4 +1,7 @@
+"use client"
+
 import { Session } from "next-auth"
+import { useSession } from "next-auth/react";
 import Image from "next/image"
 import Link from "next/link"
 
@@ -19,7 +22,9 @@ const SideBarButton = (props: {requireSession: boolean, session: Session | null,
     }
 }
 
-const Sidebar = ({ session }: { session: Session | null }) => {
+const Sidebar = () => {
+    const {data: session, status} = useSession();
+    
     return (
         <>
         <div className="fixed right-0 w-12 h-full bg-pink-200">

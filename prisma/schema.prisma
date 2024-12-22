@@ -67,3 +67,10 @@ model OldversionEvents {
   eventIdRef Int
   event   Events @relation(fields: [eventIdRef], references: [id])
 }
+
+model Tokens {
+  id  Int @id @default(autoincrement()) @unique
+  value String @unique
+  expiresAt DateTime
+  createdAt  DateTime @default(now()) 
+}
