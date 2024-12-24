@@ -71,6 +71,7 @@ model OldversionEvents {
 model Tokens {
   id  Int @id @default(autoincrement()) @unique
   value String @unique
+  email String
   expiresAt DateTime
   createdAt  DateTime @default(now()) 
 }

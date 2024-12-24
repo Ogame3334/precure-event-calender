@@ -1,6 +1,8 @@
 "use client"
 
+import { IconInput } from "@/src/components/IconInput";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useBeforeUnload } from "react-router-dom"
 
@@ -9,7 +11,7 @@ function isUserId(userId: string): boolean {
   return userIdRegex.test(userId);
 }
 
-export default function LoginPage() {
+export default function LoginPage({params}: {params: {token: string}}) {  
   useBeforeUnload(
     useCallback(
       (event)=>{
@@ -21,9 +23,12 @@ export default function LoginPage() {
     )
   )
   
+  const [isTokenValid, setIsTokenValid] = useState<-1|0|1>(-1);
+  const [email, setEmail] = useState<string>("");
   const [displayId, setDisplayId] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [iconSrc, setIconSrc] = useState<string>("/img/sample/icon/default.png");
+  const [icon, setIcon] = useState<File | null>(null);
+  const [iconUrl, setIconUrl] = useState<string>("/img/sample/icon/default.png");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
@@ -32,6 +37,20 @@ export default function LoginPage() {
   const [buttonText, setButtonText] = useState<string>("次へ");
   const [canPushButton, setCanPushButton] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  
+  const router = useRouter();
+
+  useEffect(()=>{
+    const checkToken = async () => {
+      const result = await fetch(`/api/verify/token/${params.token}`)
+      const {valid, email} = await result.json();
+      
+      setEmail(email);
+      setIsTokenValid(valid ? 1 : 0);
+    }
+    checkToken();
+  }, []);
 
   const handlePushButton = async () => {
     switch (state) {
@@ -62,6 +81,13 @@ export default function LoginPage() {
         break;
       }
       case 2:{
+        if(icon){
+          if(icon.size > 5 * 1024 * 1024){
+            setErrorMessage("アイコンは5MB以下でなければなりません。");
+            break;
+          }
+        }
+        
         setCanPushButton(false);
         setButtonText("登録");
         setState(state + 1);
@@ -73,6 +99,42 @@ export default function LoginPage() {
           break;
         }
         else{
+            if(icon){
+              const formData = new FormData();
+              formData.append("icon", icon);
+              const result = await fetch("/api/contents/images/icons", {
+                method: "POST",
+                body: formData
+              });
+              const {url} = await result.json();
+
+              setIconUrl(url);
+            }
+
+            const result = await fetch("/api/user", {
+              method: "POST",
+              body: JSON.stringify({
+                displayId,
+                name,
+                iconUrl,
+                email,
+                password
+              })
+            });
+            
+            if(!result.ok){
+              setErrorMessage("エラーが発生しました。");
+              
+              return;
+            }
+            const {status, message} = await result.json();
+
+            if(status != 0){
+              setErrorMessage(message);
+              
+              return;
+            }
+          
             setErrorMessage("");
             setCanPushButton(true);
             setButtonText("トップヘ");
@@ -107,7 +169,36 @@ export default function LoginPage() {
         setCanPushButton(false);
         break;
     }
-  }, [displayId, name, iconSrc, password, confirmPassword])
+  }, [displayId, name, password, confirmPassword])
+
+  if(isTokenValid == -1){
+    return (
+      <div>
+        トークンの整合性をチェックしています。
+      </div>
+    )
+  }
+  else if(isTokenValid == 0){
+    return (
+      <>
+        <div>
+          トークンが有効ではありません。
+          <br/>
+          以下のボタンからメール認証を行ってください。
+        </div>
+        <div className="p-2 flex justify-center items-center">
+          <button
+            className="bg-pink-300 outline-pink-400 active:translate-y-0.5 active:shadow-none px-6 py-2 rounded-xl outline outline-1 shadow-md transition"
+            onClick={e => {
+              router.push("/signup");
+            }}
+          >
+            登録
+          </button>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -165,15 +256,10 @@ export default function LoginPage() {
                 アイコン
               </div>
               <div className="flex justify-center items-center">
-                <button>
-                  <Image
-                    src={iconSrc}
-                    alt="icon"
-                    width={80}
-                    height={80}
-                    className="m-2 rounded-full"
-                  />
-                </button>
+                <IconInput
+                  icon={icon}
+                  setIcon={setIcon}
+                />
               </div>
               <div className="pb-5 text-sm text-center">
                 アイコンはあなたの顔です。<br />設定しましょう！
@@ -192,7 +278,7 @@ export default function LoginPage() {
               </div>
               <div className="p-2">
                 <input
-                  type="text"
+                  type="password"
                   className="w-full p-2 text-sm rounded-sm ountline ountline-1 outline-pink-100"
                   value={password}
                   placeholder="名前"
@@ -204,7 +290,7 @@ export default function LoginPage() {
               </div>
               <div className="p-2">
                 <input
-                  type="text"
+                  type="password"
                   className="w-full p-2 text-sm rounded-sm ountline ountline-1 outline-pink-100"
                   value={confirmPassword}
                   placeholder="名前"

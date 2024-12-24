@@ -17,12 +17,13 @@ export async function POST(req: NextRequest) {
   if(users.length > 0) return NextResponse.json({ code: 2, message: "このメールアドレスは既に登録されています。" });
 
   const token = randomUUID();
-  prisma.tokens.create({
+  await prisma.tokens.create({
     data: {
       value: token,
+      email: email,
       expiresAt: new Date(Date.now() + 60*60*1000)
     }
-  })
+  });
 
   try {
     // リクエストから送信する情報を取得
@@ -45,10 +46,10 @@ export async function POST(req: NextRequest) {
 PreCaleへのご登録、ありがとうございます！
 あと少しであなたのアカウントが完成します。
 
-以下のURLからアカウント等®区を完了してください！
+以下のURLからアカウント登録を完了してください！
 (このリンクは1時間で期限切れになります。)
 
-https://localhost:3000/signup/${token} 
+http://localhost:3000/signup/${token} 
 
 それでは、PreCaleでお会いできるのを楽しみにしています！
 

@@ -1,6 +1,6 @@
 "use client"
 
-import FollowButton from "@/src/components/FollowButton";
+import FollowEditButton from "@/src/components/FollowEditButton";
 import { Users } from "@prisma/client";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
@@ -58,7 +58,7 @@ export default function Home(){
     
     return (
         <div className="flex flex-col">
-            {session ? <FollowButton session={session} /> : <div className="h-10"/>}
+            {session ? <FollowEditButton session={session} displayId={user_id as string} /> : <div className="h-10"/>}
             <div className="mx-auto">
                 <Image 
                     src={user?.iconSrc || "/img/sample/icon/default.png"} 
