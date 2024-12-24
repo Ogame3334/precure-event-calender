@@ -58,7 +58,8 @@ export default function Home(){
     
     return (
         <div className="flex flex-col">
-            {session ? <FollowEditButton session={session} displayId={user_id as string} /> : <div className="h-10"/>}
+            {/* {session ? <FollowEditButton session={session} displayId={user_id as string} /> : <div className="h-10"/>} */}
+            <div className="h-20" />
             <div className="mx-auto">
                 <Image 
                     src={user?.iconSrc || "/img/sample/icon/default.png"} 
