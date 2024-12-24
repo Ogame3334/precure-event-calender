@@ -1,7 +1,6 @@
 "use client"
 
 import { IconInput } from "@/src/components/IconInput";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useBeforeUnload } from "react-router-dom"

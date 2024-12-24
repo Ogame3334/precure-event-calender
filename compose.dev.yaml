@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  precale:
+    image: node:18
+    command: /root/product/execute_dev.sh
+    container_name: precale
+    volumes:
+      - .:/root/product
+    ports:
+      - 3000:3000
+      - 5555:5555
+    networks:
+      - app-net
+  db:
+    image: postgres
+    container_name: precale_database
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+    env_file:
+      - ./.env.local
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    name: precale_app_net
+    driver: bridge
+
+volumes:
+  dbdata: null

@@ -1,8 +1,6 @@
 "use client"
 
-import RoundedButton from "@/src/components/RoundedButton"
 import { signOut } from "next-auth/react"
-import { useRouter } from "next/router";
 
 export default function Home() {
     return (

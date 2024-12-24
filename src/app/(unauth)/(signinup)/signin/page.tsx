@@ -3,10 +3,17 @@
 import { signIn, useSession } from "next-auth/react"
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
+export default function Home(){
+  return (
+    <Suspense>
+      <LoginPage />
+    </Suspense>
+  )
+}
 
-export default function LoginPage() {
+function LoginPage() {
   const { data: session, status } = useSession();
 
   const [displayIdOrEmail, setDisplayIdOrEmail] = useState("");

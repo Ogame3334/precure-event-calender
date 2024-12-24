@@ -3,12 +3,8 @@
 import { useState } from 'react'
 import Calendar from '../../../../components/Calendar'
 import ReactModal from 'react-modal'
-import AddEventModal from '../../../../components/AddEventModal'
 import RoundedButton from '../../../../components/RoundedButton'
 import Event from '../../../../libs/Event'
-import { Session } from 'inspector'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/src/libs/next-auth-options'
 import { useRouter } from 'next/navigation'
 
 ReactModal.setAppElement('body');
